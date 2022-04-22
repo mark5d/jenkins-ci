@@ -42,6 +42,7 @@ pipeline{
             steps{
                 timeout(time: 20, unit:"MINUTES"){
                     script{
+                        tools.PrintMes("执行打包","green")
                         println("运行构建")
                     }
                 }
