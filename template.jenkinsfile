@@ -1,0 +1,127 @@
+// @Library('jenkinslib@master')
+// String Workspace = "/opt"
+
+pipeline{
+    
+    agent { node { label "built-in"   //指定运行此流水线的节点
+                    // customWorkspace "${Workspace}"  //指定运行工作目录（可选）
+                    }}
+    tools {
+        maven 'maven-3.8.5'
+    }
+    
+    options{
+        timestamps() //日志会有时间
+        skipDefaultCheckout() //删除隐式checkout scm语句
+        disableConcurrentBuilds() //禁止并行
+        timeout(time: 1,unit: 'HOURS') //设置流水线超时时间
+    }
+    
+    //流水线的阶段
+    stages{
+        //阶段1 获取代码
+        stage("CheckOut"){
+            steps{
+                timeout(time: 5, unit:"MINUTES"){
+                    script{
+                        // mvnHome = tool "maven-3.8.5"
+                        // mvnJDK = tool "jdk-8.201"
+                        // println(mvnHome)
+                        // sh "${mvnHome}/bin/mvn -v"
+                        
+                        // println(mvnJDK)
+                        sh "mvn -v"
+                        println("获取代码")
+                    }
+                }
+            }
+        }
+        //阶段2 构建
+        stage("Build"){
+            steps{
+                timeout(time: 20, unit:"MINUTES"){
+                    script{
+                        println("运行构建")
+                    }
+                }
+            }
+        }
+        //阶段3 代码扫描
+        stage("CodeScan"){
+            steps{
+                timeout(time: 30, unit:"MINUTES"){
+                    script{
+                        println("代码扫描")
+                    }
+                }
+            }
+        }
+        //阶段4 单元测试
+        stage("UnitTest"){
+            steps{
+                timeout(time: 30, unit:"MINUTES"){
+                    script{
+                        println("单元测试")
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always{
+            script{
+                println("流水线不管是否成功都会调用")
+            }
+        }
+        
+        success{
+            script{
+                currentBuild.description = "流水线执行成功"
+                println("流水线执行成功")
+            }
+        
+        }
+        failure{
+            script{
+                currentBuild.description = "流水线执行失败"
+                println("流水线执行失败")
+            }
+        }
+        
+        aborted{
+            script{
+                currentBuild.description = "流水线执行取消"
+                println("流水线执行取消")
+            }
+        
+        }
+    }
+}
+
+
+//authorizationMatrix,
+//buildDiscarder, 
+//catchError, 
+//checkoutToSubdirectory, 
+//disableConcurrentBuilds, disableResume, 
+//durabilityHint, 
+//githubProjectProperty, 
+//overrideIndexTriggers, 
+//parallelsAlwaysFailFast, 
+//preserveStashes, 
+//quietPeriod, 
+//rateLimitBuilds, 
+//retry, 
+//script, 
+//skipDefaultCheckout, 
+//skipStagesAfterUnstable, 
+//timeout, 
+//timestamps, 
+//waitUntil, 
+//warnError, 
+//withChecks, 
+//withContext, 
+//withCredentials, 
+//withEnv, 
+//wrap, 
+//ws
