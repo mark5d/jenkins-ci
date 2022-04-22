@@ -30,8 +30,9 @@ pipeline{
                         // sh "${mvnHome}/bin/mvn -v"
                         
                         // println(mvnJDK)
-                        sh "mvn -v"
+                        // sh "mvn -v"
                         println("获取代码")
+                        git branch: 'main', credentialsId: 'root', url: 'http://gitlab-headless/root/back-end.git'
                     }
                 }
             }
