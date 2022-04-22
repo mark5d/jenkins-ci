@@ -3,6 +3,7 @@
 @Library('jenkinslibrary@master') _
 // String Workspace = "/opt"
 
+def tools = new org.devops.tools()
 pipeline{
     
     agent { node { label "built-in"   //指定运行此流水线的节点
