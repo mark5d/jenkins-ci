@@ -1,6 +1,6 @@
 #!groovy
 
-@Library('jenkinslib@master') _
+@Library('jenkinslibrary@master') _
 // String Workspace = "/opt"
 
 pipeline{
