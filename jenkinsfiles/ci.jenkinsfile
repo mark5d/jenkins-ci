@@ -39,7 +39,7 @@ if ("${runOpts}" == "GitlabPush"){
 
 //pipeline
 pipeline{
-    agent { node { label "build"}}
+    agent { node { label "build-in" }}
     
     
     stages{
