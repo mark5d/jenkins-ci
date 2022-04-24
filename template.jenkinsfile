@@ -51,7 +51,8 @@ pipeline{
                 timeout(time: 20, unit:"MINUTES"){
                     script{
                         tools.PrintMes("构建打包","green")
-                        print(${runOpts})
+                        string runOpts =${runOpts}
+                        print(runOpts)
 
                     }
                 }
