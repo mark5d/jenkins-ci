@@ -2,7 +2,7 @@ package org.devops
 
 
 //scan
-def SonarScan(sonarServer,projectName,projectDesc,projectPath,branchName){
+def SonarScan(sonarServer,projectName,projectDesc,projectPath,branchName,scannerHome){
     
     //定义服务器列表
     def servers = ["test":"sonarqube-test","prod":"sonarqube-prod"]
@@ -12,7 +12,7 @@ def SonarScan(sonarServer,projectName,projectDesc,projectPath,branchName){
         // def scannerHome = "/home/jenkins/buildtools/sonar-scanner-3.2.0.1227-linux/"
         //def sonarServer = "http://192.168.1.200:9000"
        
-        def scannerHome = tool 'sonar-scanner'
+        
         def sonarDate = sh  returnStdout: true, script: 'date  +%Y%m%d%H%M%S'
         sonarDate = sonarDate - "\n"
     
