@@ -66,8 +66,8 @@ pipeline{
                 timeout(time: 30, unit:"MINUTES"){
                     script{
                         tools.PrintMes("代码扫描","green")
-                        // def scannerHome = tool 'sonar-scanner'
-                        // sonar.SonarScan("test","back-end",'first',"src","main",scannerHome)
+                        def scannerHome = tool 'sonar-scanner'
+                        sonar.SonarScan("test","back-end",'first',"src","main",scannerHome)
 
                     }
                 }
