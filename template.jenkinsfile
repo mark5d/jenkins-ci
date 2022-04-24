@@ -50,9 +50,10 @@ pipeline{
             steps{
                 timeout(time: 20, unit:"MINUTES"){
                     script{
+                        mvnHome = tool "maven-3.8.5"
                         tools.PrintMes("构建打包","green")
                         sh  """ 
-                            mvn clean package -DskipTests"""
+                            ${mvnHome}/bin/mvn clean package -DskipTests"""
 
 
                     }
