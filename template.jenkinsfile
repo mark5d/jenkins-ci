@@ -51,8 +51,9 @@ pipeline{
                 timeout(time: 20, unit:"MINUTES"){
                     script{
                         tools.PrintMes("构建打包","green")
-                        string runOpts =${runOpts}
-                        print(runOpts)
+                        sh  """ 
+                            mvn clean package -DskipTests"""
+
 
                     }
                 }
