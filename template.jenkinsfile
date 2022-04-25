@@ -114,7 +114,7 @@ pipeline{
                     contentType: "APPLICATION_JSON",
                     consoleLogResponseBody: true,
                     ignoreSslErrors: true, 
-                    requestBody: reqBody,
+                    requestBody: "",
                     url: "${gitServer}/${reqUrl}"
                 //quiet: true
                 }
