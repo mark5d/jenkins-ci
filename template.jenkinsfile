@@ -53,10 +53,11 @@ pipeline{
                         
                         // println(mvnJDK)
                         // sh "mvn -v"
+                        def branch = ref - "refs/heads/"
                         def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
                         utils.PrintMes("获取代码","green")
                         checkout([$class: 'GitSCM', 
-                            branches: [[name: '*/main']], 
+                            branches: [[name: "*/${branch}"]], 
                             extensions: [],
                             userRemoteConfigs: 
                                 [[credentialsId: ci_config.gitlabAccountCredentialsId, 
