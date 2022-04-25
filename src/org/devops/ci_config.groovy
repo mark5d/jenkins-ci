@@ -18,6 +18,8 @@ class ci_config {
 
     def gitlabApiHost = "http://gitlab-headless/api/v4"
 
+    def gitlabAccountCredentialsId = "root"
+
     def buildingContainers = [
         "jdk8-maven3u5u0" : "22222"
     ] 

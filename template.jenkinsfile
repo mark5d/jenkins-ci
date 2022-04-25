@@ -39,6 +39,7 @@ pipeline{
 
                         utils.PrintMes("ref:${ref}","green")
                         utils.PrintMes("git_http_url:${git_http_url}","green")
+                        utils.PrintMes("user_username:${user_username}","green")
                         // def imageRepository =config.imageRepository
                         print("${ci_config.imageRepository}")
                         print("${ci_config.buildingContainers['jdk8-maven3u5u0']}")
@@ -51,12 +52,12 @@ pipeline{
                         // println(mvnJDK)
                         // sh "mvn -v"
                         utils.PrintMes("获取代码","green")
-                        // checkout([$class: 'GitSCM', 
-                        //     branches: [[name: '*/main']], 
-                        //     extensions: [],
-                        //     userRemoteConfigs: 
-                        //         [[credentialsId: 'root', 
-                        //         url: 'http://gitlab-headless/root/back-end.git']]])
+                        checkout([$class: 'GitSCM', 
+                            branches: [[name: '*/main']], 
+                            extensions: [],
+                            userRemoteConfigs: 
+                                [[credentialsId: ci_config.gitlabAccountCredentialsId, 
+                                url: git_http_url]]])
                     }
                 }
             }
