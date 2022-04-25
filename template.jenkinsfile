@@ -7,13 +7,8 @@ import groovy.util.ConfigSlurper
 // String Workspace = "/opt"
 // def sonar = new org.devops.sonarqube()
 def tools = new org.devops.utils()
-def config = new ConfigSlurper()
-        .parse(
-                new File("org.devops.ci-config.groovy")
-                        .toURI()
-                        .toURL()
-        )
-// def config = new org.devops.ci-config()
+// def config = 
+def config = new org.devops.ci-config()
 
 
 // String branchName = "${branchName}"
