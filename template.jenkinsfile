@@ -38,12 +38,12 @@ pipeline{
                         // println(mvnJDK)
                         // sh "mvn -v"
                         tools.PrintMes("获取代码","green")
-                        checkout([$class: 'GitSCM', 
-                            branches: [[name: '*/main']], 
-                            extensions: [],
-                            userRemoteConfigs: 
-                                [[credentialsId: 'root', 
-                                url: 'http://gitlab-headless/root/back-end.git']]])
+                        // checkout([$class: 'GitSCM', 
+                        //     branches: [[name: '*/main']], 
+                        //     extensions: [],
+                        //     userRemoteConfigs: 
+                        //         [[credentialsId: 'root', 
+                        //         url: 'http://gitlab-headless/root/back-end.git']]])
                     }
                 }
             }
@@ -54,9 +54,9 @@ pipeline{
                 timeout(time: 20, unit:"MINUTES"){
                     script{
                         mvnHome = tool "maven-3.8.5"
-                        tools.PrintMes("构建打包","green")
-                        sh  """ 
-                            ${mvnHome}/bin/mvn clean package -DskipTests"""
+                        // tools.PrintMes("构建打包","green")
+                        // sh  """ 
+                        //     ${mvnHome}/bin/mvn clean package -DskipTests"""
 
 
                     }
