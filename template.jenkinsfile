@@ -42,7 +42,7 @@ pipeline{
                         // String branchName=branch
 
                         // print("${branchName}")
-                        def imageRepository =config.imageRepository
+                        def imageRepository =config.args.imageRepository
                         print("${config}")
                         //  tools.PrintMes("${branchName}","green")
                         // mvnHome = tool "maven-3.8.5"
