@@ -2,8 +2,9 @@
 
 @Library('jenkinslibrary@master') _
 // String Workspace = "/opt"
-def sonar = new org.devops.sonarqube()
-def tools = new org.devops.tools()
+// def sonar = new org.devops.sonarqube()
+def tools = new org.devops.utils()
+def ciConfig = new org.devops.ci-config()
 
 // String branchName = "${branchName}"
 
@@ -36,6 +37,7 @@ pipeline{
                         String branchName=branch
 
                         print("${branchName}")
+                        print("${ciConfig.imageRepository}")
                         //  tools.PrintMes("${branchName}","green")
                         // mvnHome = tool "maven-3.8.5"
                         // mvnJDK = tool "jdk-8.201"
@@ -105,20 +107,20 @@ pipeline{
         
         success{
             script{
-                currentBuild.description = "流水线执行成功"
-                def gitServer = "http://gitlab-headless/api/v4"
-                def reqUrl = "projects/2/statuses/1a680d47077aa22f771058b41615bc668d4afb11?state=success"
-                withCredentials([string(credentialsId: 'gitlab-token', variable: 'gitlabtoken')]) { 
-                result = httpRequest customHeaders: [[maskValue: true, name: 'PRIVATE-TOKEN', value: "${gitlabtoken}"]], 
-                    httpMode: "POST", 
-                    contentType: "APPLICATION_JSON",
-                    consoleLogResponseBody: true,
-                    ignoreSslErrors: true, 
-                    requestBody: "",
-                    url: "${gitServer}/${reqUrl}"
-                // //quiet: true
-                // println("${gitlabtoken}")
-                }
+                // currentBuild.description = "流水线执行成功"
+                // def gitServer = "http://gitlab-headless/api/v4"
+                // def reqUrl = "projects/2/statuses/1a680d47077aa22f771058b41615bc668d4afb11?state=success"
+                // withCredentials([string(credentialsId: 'gitlab-token', variable: 'gitlabtoken')]) { 
+                // result = httpRequest customHeaders: [[maskValue: true, name: 'PRIVATE-TOKEN', value: "${gitlabtoken}"]], 
+                //     httpMode: "POST", 
+                //     contentType: "APPLICATION_JSON",
+                //     consoleLogResponseBody: true,
+                //     ignoreSslErrors: true, 
+                //     requestBody: "",
+                //     url: "${gitServer}/${reqUrl}"
+                // // //quiet: true
+                // // println("${gitlabtoken}")
+                // }
                 println("流水线执行成功")
 
             }
