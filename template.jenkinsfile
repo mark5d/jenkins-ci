@@ -6,14 +6,9 @@ import groovy.util.ConfigSlurper
 // import groovy.json.JsonSlurper
 // String Workspace = "/opt"
 // def sonar = new org.devops.sonarqube()
-def tools = new org.devops.utils()
-// def config = 
+def utils = new org.devops.utils()
 def ci_config = new org.devops.ci_config()
 
-
-// String branchName = "${branchName}"
-
-// def env1 = "${env}"
 pipeline{
     
     agent { node { label "built-in"   //指定运行此流水线的节点
@@ -39,9 +34,11 @@ pipeline{
                 timeout(time: 5, unit:"MINUTES"){
                     script{
 
-                        // String branchName=branch
+                  
 
-                        // print("${branchName}")
+
+                        utils.PrintMes("ref:${ref}","green")
+                        utils.PrintMes("git_http_url:${git_http_url}","green")
                         // def imageRepository =config.imageRepository
                         print("${ci_config.imageRepository}")
                         print("${ci_config.buildingContainers['jdk8-maven3u5u0']}")
@@ -53,7 +50,7 @@ pipeline{
                         
                         // println(mvnJDK)
                         // sh "mvn -v"
-                        tools.PrintMes("获取代码","green")
+                        utils.PrintMes("获取代码","green")
                         // checkout([$class: 'GitSCM', 
                         //     branches: [[name: '*/main']], 
                         //     extensions: [],
@@ -86,7 +83,7 @@ pipeline{
                     script{
                
          
-                        tools.PrintMes("代码扫描","green")
+                        utils.PrintMes("代码扫描","green")
                         // def scannerHome = tool 'sonar-scanner'
                         // sonar.SonarScan("test","back-end",'first',"src","main",scannerHome)
 
