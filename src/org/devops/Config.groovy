@@ -11,12 +11,10 @@ package org.devops
     
 // }
 
-// def args =[
-//     imageRepository : "11111"
-// ] 
 
-// class Config{
-//     def imageRepository = "11111"
-// }
 
-def imageRepository = "11111"
+Config {
+    def imageRepository = "11111"
+}
+
+
