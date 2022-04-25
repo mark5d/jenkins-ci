@@ -13,7 +13,7 @@ package org.devops
 
 
 
-class Config {
+class ci-config {
     def imageRepository = "11111"
 
     def buildingContainers = [

@@ -8,7 +8,7 @@ import groovy.util.ConfigSlurper
 // def sonar = new org.devops.sonarqube()
 def tools = new org.devops.utils()
 // def config = 
-def config = new org.devops.Config()
+def config = new org.devops.ci-config()
 
 
 // String branchName = "${branchName}"
