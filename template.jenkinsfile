@@ -33,29 +33,15 @@ pipeline{
             
                 timeout(time: 5, unit:"MINUTES"){
                     script{
+                        // utils.PrintMes("ref:${ref}","green")
+                        // utils.PrintMes("git_http_url:${git_http_url}","green")
+                        // utils.PrintMes("user_username:${user_username}","green")
+                        // print("${ci_config.gitlabAccountCredentialsId}")
+                        // print("${ci_config.buildingContainers['jdk8-maven3u5u0']}")
 
-                  
-
-
-                        utils.PrintMes("ref:${ref}","green")
-                        utils.PrintMes("git_http_url:${git_http_url}","green")
-                        utils.PrintMes("user_username:${user_username}","green")
-                        // def imageRepository =config.imageRepository
-                        print("${ci_config.imageRepository}")
-                        print("${ci_config.gitlabAccountCredentialsId}")
-                        // print("${ci_config.imageRepository}")
-                        print("${ci_config.buildingContainers['jdk8-maven3u5u0']}")
-                        //  tools.PrintMes("${branchName}","green")
-                        // mvnHome = tool "maven-3.8.5"
-                        // mvnJDK = tool "jdk-8.201"
-                        // println(mvnHome)
-                        // sh "${mvnHome}/bin/mvn -v"
-                        
-                        // println(mvnJDK)
-                        // sh "mvn -v"
+                        utils.PrintMes("获取代码","green")
                         def branch = ref - "refs/heads/"
                         def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
-                        utils.PrintMes("获取代码","green")
                         checkout([$class: 'GitSCM', 
                             branches: [[name: "*/${branch}"]], 
                             extensions: [],
