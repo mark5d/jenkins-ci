@@ -32,7 +32,7 @@ pipeline{
             
                 timeout(time: 5, unit:"MINUTES"){
                     script{
-                        // print("${branchName}")
+                        print("${branch}")
                         //  tools.PrintMes("${branchName}","green")
                         // mvnHome = tool "maven-3.8.5"
                         // mvnJDK = tool "jdk-8.201"
