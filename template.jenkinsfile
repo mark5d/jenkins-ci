@@ -5,7 +5,7 @@
 def sonar = new org.devops.sonarqube()
 def tools = new org.devops.tools()
 
-String branchName = "${env.branch}"
+String branchName = "${branchName}"
 
 // def env1 = "${env}"
 pipeline{
