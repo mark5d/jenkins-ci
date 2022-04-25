@@ -108,7 +108,7 @@ pipeline{
                 currentBuild.description = "流水线执行成功"
                 def gitServer = "http://gitlab-headless/api/v4"
                 def reqUrl = "projects/2/statuses/1a680d47077aa22f771058b41615bc668d4afb11?state=success"
-                withCredentials([usernameColonPassword(credentialsId: 'root', variable: 'gitlabtoken')]) { 
+                withCredentials([usernameColonPassword(credentialsId: 'gitlab-token', variable: 'gitlabtoken')]) { 
                 result = httpRequest customHeaders: [[maskValue: true, name: 'PRIVATE-TOKEN', value: "${gitlabtoken}"]], 
                     httpMode: "POST", 
                     contentType: "APPLICATION_JSON",
