@@ -34,9 +34,9 @@ pipeline{
                 timeout(time: 5, unit:"MINUTES"){
                     script{
 
-                        String branchName=branch
+                        // String branchName=branch
 
-                        print("${branchName}")
+                        // print("${branchName}")
                         print("${ciConfig.imageRepository}")
                         //  tools.PrintMes("${branchName}","green")
                         // mvnHome = tool "maven-3.8.5"
