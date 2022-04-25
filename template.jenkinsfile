@@ -2,6 +2,7 @@
 
 @Library('jenkinslibrary@master') _
 
+import groovy.util.ConfigSlurper
 // import groovy.json.JsonSlurper
 // String Workspace = "/opt"
 // def sonar = new org.devops.sonarqube()
