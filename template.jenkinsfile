@@ -8,7 +8,7 @@ import groovy.util.ConfigSlurper
 // def sonar = new org.devops.sonarqube()
 def tools = new org.devops.utils()
 // def config = 
-def config = new org.devops.ciconfig()
+def config = new org.devops.Config()
 
 
 // String branchName = "${branchName}"
@@ -42,8 +42,8 @@ pipeline{
                         // String branchName=branch
 
                         // print("${branchName}")
-                        def imageRepository =config.args.imageRepository
-                        print("${config}")
+                        def imageRepository =config.imageRepository
+                        print("${imageRepository}")
                         //  tools.PrintMes("${branchName}","green")
                         // mvnHome = tool "maven-3.8.5"
                         // mvnJDK = tool "jdk-8.201"
