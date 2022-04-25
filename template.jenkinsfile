@@ -6,10 +6,11 @@
 def tools = new org.devops.utils()
 def config = new ConfigSlurper()
         .parse(
-                new File("org.devops.ci-Config.groovy")
+                new File("org.devops.ci-config.groovy")
                         .toURI()
                         .toURL()
         )
+// def config = new org.devops.ci-config()
 
 
 // String branchName = "${branchName}"
