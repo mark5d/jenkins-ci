@@ -53,13 +53,14 @@ pipeline{
                         
                         // println(mvnJDK)
                         // sh "mvn -v"
+                        def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
                         utils.PrintMes("获取代码","green")
                         checkout([$class: 'GitSCM', 
                             branches: [[name: '*/main']], 
                             extensions: [],
                             userRemoteConfigs: 
                                 [[credentialsId: ci_config.gitlabAccountCredentialsId, 
-                                url: 'http://gitlab-headless/root/back-end.git']]])
+                                url: gitHttpUrl]]])
                     }
                 }
             }
