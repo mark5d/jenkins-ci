@@ -13,8 +13,12 @@ package org.devops
 
 
 
-Config {
+class Config {
     def imageRepository = "11111"
+
+    def buildingContainers = [
+        "jdk8-maven3u5u0" : "22222"
+    ] 
 }
 
 
