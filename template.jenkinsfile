@@ -56,8 +56,8 @@ pipeline{
                             branches: [[name: '*/main']], 
                             extensions: [],
                             userRemoteConfigs: 
-                                [[credentialsId: ci_config.gitlabAccountCredentialsId, 
-                                url: git_http_url]]])
+                                [[credentialsId: 'root', 
+                                url: 'http://gitlab-headless/root/back-end.git']]])
                     }
                 }
             }
