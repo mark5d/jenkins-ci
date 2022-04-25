@@ -42,6 +42,8 @@ pipeline{
                         utils.PrintMes("user_username:${user_username}","green")
                         // def imageRepository =config.imageRepository
                         print("${ci_config.imageRepository}")
+                        print("${ci_config.gitlabAccountCredentialsId}")
+                        // print("${ci_config.imageRepository}")
                         print("${ci_config.buildingContainers['jdk8-maven3u5u0']}")
                         //  tools.PrintMes("${branchName}","green")
                         // mvnHome = tool "maven-3.8.5"
@@ -56,7 +58,7 @@ pipeline{
                             branches: [[name: '*/main']], 
                             extensions: [],
                             userRemoteConfigs: 
-                                [[credentialsId: 'root', 
+                                [[credentialsId: ci_config.gitlabAccountCredentialsId, 
                                 url: 'http://gitlab-headless/root/back-end.git']]])
                     }
                 }
