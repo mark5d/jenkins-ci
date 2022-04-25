@@ -105,19 +105,19 @@ pipeline{
         
         success{
             script{
-                // currentBuild.description = "流水线执行成功"
-                // def gitServer = "http://gitlab-headless/api/v4"
-                // def reqUrl = "projects//statuses/commitSha//state="
-                // withCredentials([usernameColonPassword(credentialsId: 'root', variable: 'gitlabtoken')]) { 
-                // result = httpRequest customHeaders: [[maskValue: true, name: 'PRIVATE-TOKEN', value: "${gitlabToken}"]], 
-                //     httpMode: reqType, 
-                //     contentType: "APPLICATION_JSON",
-                //     consoleLogResponseBody: true,
-                //     ignoreSslErrors: true, 
-                //     requestBody: reqBody,
-                //     url: "${gitServer}/${reqUrl}"
-                // //quiet: true
-                // }
+                currentBuild.description = "流水线执行成功"
+                def gitServer = "http://gitlab-headless/api/v4"
+                def reqUrl = "projects/2/statuses/commitSha/1a680d47077aa22f771058b41615bc668d4afb11/state=success"
+                withCredentials([usernameColonPassword(credentialsId: 'root', variable: 'gitlabtoken')]) { 
+                result = httpRequest customHeaders: [[maskValue: true, name: 'PRIVATE-TOKEN', value: "${gitlabToken}"]], 
+                    httpMode: reqType, 
+                    contentType: "APPLICATION_JSON",
+                    consoleLogResponseBody: true,
+                    ignoreSslErrors: true, 
+                    requestBody: reqBody,
+                    url: "${gitServer}/${reqUrl}"
+                //quiet: true
+                }
                 println("流水线执行成功")
             }
         
