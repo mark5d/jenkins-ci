@@ -5,7 +5,7 @@
 def sonar = new org.devops.sonarqube()
 def tools = new org.devops.tools()
 
-def env1 = "${env}"
+// def env1 = "${env}"
 pipeline{
     
     agent { node { label "built-in"   //指定运行此流水线的节点
@@ -27,7 +27,7 @@ pipeline{
         //阶段1 获取代码
         stage("CheckOut"){
             steps{
-                print("${env1}")
+                // print("${env1}")
                 timeout(time: 5, unit:"MINUTES"){
                     script{
                         // mvnHome = tool "maven-3.8.5"
