@@ -73,7 +73,7 @@ pipeline{
                     script{
                
          
-                        // tools.PrintMes("代码扫描","green")
+                        tools.PrintMes("代码扫描","green")
                         // def scannerHome = tool 'sonar-scanner'
                         // sonar.SonarScan("test","back-end",'first',"src","main",scannerHome)
 
@@ -101,19 +101,19 @@ pipeline{
         
         success{
             script{
-                currentBuild.description = "流水线执行成功"
-                def gitServer = "http://gitlab-headless/api/v4"
-                def reqUrl = "projects//statuses/commitSha//state="
-                withCredentials([usernameColonPassword(credentialsId: 'root', variable: 'gitlabtoken')]) { 
-                result = httpRequest customHeaders: [[maskValue: true, name: 'PRIVATE-TOKEN', value: "${gitlabToken}"]], 
-                    httpMode: reqType, 
-                    contentType: "APPLICATION_JSON",
-                    consoleLogResponseBody: true,
-                    ignoreSslErrors: true, 
-                    requestBody: reqBody,
-                    url: "${gitServer}/${reqUrl}"
-                //quiet: true
-                }
+                // currentBuild.description = "流水线执行成功"
+                // def gitServer = "http://gitlab-headless/api/v4"
+                // def reqUrl = "projects//statuses/commitSha//state="
+                // withCredentials([usernameColonPassword(credentialsId: 'root', variable: 'gitlabtoken')]) { 
+                // result = httpRequest customHeaders: [[maskValue: true, name: 'PRIVATE-TOKEN', value: "${gitlabToken}"]], 
+                //     httpMode: reqType, 
+                //     contentType: "APPLICATION_JSON",
+                //     consoleLogResponseBody: true,
+                //     ignoreSslErrors: true, 
+                //     requestBody: reqBody,
+                //     url: "${gitServer}/${reqUrl}"
+                // //quiet: true
+                // }
                 println("流水线执行成功")
             }
         
