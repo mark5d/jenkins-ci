@@ -33,7 +33,7 @@ pipeline{
                 timeout(time: 5, unit:"MINUTES"){
                     script{
 
-                        string branchName=branch
+                        String branchName=branch
 
                         print("${branchName}")
                         //  tools.PrintMes("${branchName}","green")
