@@ -14,14 +14,17 @@ package org.devops
 
 
 class ci_config {
-    def imageRepository = "11111"
+    def imageRepository = "https://harbor.templete.com/"
 
     def gitlabApiHost = "http://gitlab-headless/api/v4"
     def gitlabIngressHost = "gitlab.example.com"
     def gitlabHeadlessHost = "gitlab-headless"
     def gitlabAccountCredentialsId = "root"
 
-    def buildingContainers = [
+    def pipelineWith =[ "main" , "qa" , "dev" ]
+
+    def dockerContainer = ""
+    def javaBuildContainers = [
         "jdk8-maven3u5u0" : "22222"
     ] 
 }

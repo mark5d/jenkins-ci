@@ -9,9 +9,21 @@ import groovy.util.ConfigSlurper
 def utils = new org.devops.utils()
 def ci_config = new org.devops.ci_config()
 
+// def git_address = "http://192.168.66.100:82/itheima_group/tensquare_back_cluster.git" 
+// def git_auth = "9d9a2707-eab7-4dc9-b106-e52f329cbc95"
+
+ //创建一个Pod的模板，label为jenkins-slave 
+podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [ 
+    containerTemplate( 
+        name: 'jnlp', 
+        image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2" 
+        ) 
+    ] 
+)
+
 pipeline{
     
-    agent { node { label "built-in"   //指定运行此流水线的节点
+    agent { node { label "jenkins-slave"   //指定运行此流水线的节点
                     // customWorkspace "${Workspace}"  //指定运行工作目录（可选）
                     }}
     // tools {
