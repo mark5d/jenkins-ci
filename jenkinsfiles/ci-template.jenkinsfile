@@ -46,7 +46,7 @@ pipeline{
             steps{
                 timeout(time: 30, unit:"MINUTES"){
                     script{
-                        currentBuild.description += "CodeScan"
+                        currentBuild.description += "\nCodeScan"
                         utils.PrintMes("代码扫描","green")
                     }
                 }
@@ -57,7 +57,7 @@ pipeline{
             steps{
                 timeout(time: 30, unit:"MINUTES"){
                     script{
-                        currentBuild.description += "UnitTest"
+                        currentBuild.description += "\nUnitTest"
                         utils.PrintMes("UnitTest","green")
                     }
                 }
@@ -74,21 +74,21 @@ pipeline{
         
         success{
             script{
-                currentBuild.description += "/n流水线执行成功"
+                currentBuild.description += "\n流水线执行成功"
                 utils.PrintMes("流水线执行成功","green")
             }
         
         }
         failure{
             script{
-                currentBuild.description = "流水线执行失败"
+                currentBuild.description = "\n流水线执行失败"
                 utils.PrintMes("流水线执行失败","green")
             }
         }
         
         aborted{
             script{
-                currentBuild.description = "流水线执行取消"
+                currentBuild.description = "\n流水线执行取消"
                 utils.PrintMes("流水线执行取消","green")
             }  
         }
