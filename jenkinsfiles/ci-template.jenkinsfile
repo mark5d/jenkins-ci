@@ -6,7 +6,7 @@ pipeline{
     agent { 
         node { 
             label "built-in"   //指定运行此流水线的节点
-            customWorkspace "${Workspace}"  //指定运行工作目录（可选）
+            // customWorkspace "${Workspace}"  //指定运行工作目录（可选）
         }              
     }
 
