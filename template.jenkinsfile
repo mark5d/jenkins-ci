@@ -67,15 +67,6 @@ pipeline{
                     resources:
                         limits: {}
                         requests: {}
-                    volumeMounts:
-                    - mountPath: "/home/jenkins/agent"
-                    name: "workspace-volume"
-                    readOnly: false
-                    restartPolicy: "Never"
-                    volumes:
-                    - emptyDir:
-                    medium: ""
-                    name: "workspace-volume"
             '''
         }
         // node { label "jenkins-slave"   //指定运行此流水线的节点
