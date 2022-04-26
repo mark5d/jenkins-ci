@@ -1,12 +1,13 @@
 @Library('jenkinslibrary@master') _
 
+def utils = new org.devops.utils()
+
 pipeline{
     agent { 
         node { 
-            label "master"   //指定运行此流水线的节点
+            label "built-in"   //指定运行此流水线的节点
             customWorkspace "${Workspace}"  //指定运行工作目录（可选）
-        }
-                    
+        }              
     }
 
     options{
@@ -59,6 +60,7 @@ pipeline{
             }
         }
     }
+
     post {
         always{
             script{
