@@ -123,12 +123,12 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
 //             }
 //         }
 //     }
-//     post {
-        always{
-            script{
-                println("流水线不管是否成功都会调用")
-            }
-        }
+    // post {
+        // always{
+        //     script{
+        //         println("流水线不管是否成功都会调用")
+        //     }
+        // }
         
 //         success{
 //             script{
