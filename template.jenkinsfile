@@ -37,6 +37,14 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
                     url: gitHttpUrl]]])
         } 
     }
+
+    post{
+        always{
+            script{
+                utils.PrintMes("流水线不管是否成功都会调用")
+            }
+        }
+    }
 }
 
 // pipeline{
@@ -116,11 +124,11 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
 //         }
 //     }
 //     post {
-//         always{
-//             script{
-//                 println("流水线不管是否成功都会调用")
-//             }
-//         }
+        always{
+            script{
+                println("流水线不管是否成功都会调用")
+            }
+        }
         
 //         success{
 //             script{
