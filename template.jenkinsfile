@@ -26,15 +26,15 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
         // 第一步 
         stage('拉取代码'){ 
             currentBuild.description = "获取代码"
-            utils.PrintMes("获取代码","green")
-            def branch = ref - "refs/heads/"
-            def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
-            checkout([$class: 'GitSCM', 
-                branches: [[name: "*/${branch}"]], 
-                extensions: [],
-                userRemoteConfigs: 
-                    [[credentialsId: ci_config.gitlabAccountCredentialsId, 
-                    url: gitHttpUrl]]])
+            // utils.PrintMes("获取代码","green")
+            // def branch = ref - "refs/heads/"
+            // def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
+            // checkout([$class: 'GitSCM', 
+            //     branches: [[name: "*/${branch}"]], 
+            //     extensions: [],
+            //     userRemoteConfigs: 
+            //         [[credentialsId: ci_config.gitlabAccountCredentialsId, 
+            //         url: gitHttpUrl]]])
         } 
 
         // post{
