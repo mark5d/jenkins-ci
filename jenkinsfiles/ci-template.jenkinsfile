@@ -24,7 +24,7 @@ pipeline{
             steps{
                 timeout(time: 5, unit:"MINUTES"){
                     script{
-                        currentBuild.description = "CheckOut"
+                        currentBuild.description = "/nCheckOut"
                         utils.PrintMes("获取代码","green")
                     }
                 }
@@ -74,7 +74,7 @@ pipeline{
         
         success{
             script{
-                currentBuild.description += "流水线执行成功"
+                currentBuild.description += "/n流水线执行成功"
                 utils.PrintMes("流水线执行成功","green")
             }
         
