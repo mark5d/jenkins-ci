@@ -111,8 +111,7 @@ pipeline{
             steps{
                 timeout(time: 20, unit:"MINUTES"){
                     script{
-                        mvnHome = tool "maven-3.8.5"
-                        // tools.PrintMes("构建打包","green")
+                        tools.PrintMes("构建打包","green")
                         // sh  """ 
                         //     ${mvnHome}/bin/mvn clean package -DskipTests"""
 
@@ -139,7 +138,7 @@ pipeline{
             steps{
                 timeout(time: 30, unit:"MINUTES"){
                     script{
-                        println("单元测试")
+                        utils.PrintMes("UnitTest","green")
                     }
                 }
             }
@@ -148,7 +147,7 @@ pipeline{
     post {
         always{
             script{
-                println("流水线不管是否成功都会调用")
+                utils.PrintMes("流水线不管是否成功都会调用","green")
             }
         }
         
@@ -168,24 +167,22 @@ pipeline{
                 // // //quiet: true
                 // // println("${gitlabtoken}")
                 // }
-                println("流水线执行成功")
-
+                utils.PrintMes("流水线执行成功","green")
             }
         
         }
         failure{
             script{
                 currentBuild.description = "流水线执行失败"
-                println("流水线执行失败")
+                utils.PrintMes("流水线执行失败","green")
             }
         }
         
         aborted{
             script{
                 currentBuild.description = "流水线执行取消"
-                println("流水线执行取消")
-            }
-        
+                utils.PrintMes("流水线执行取消","green")
+            }  
         }
     }
 }
