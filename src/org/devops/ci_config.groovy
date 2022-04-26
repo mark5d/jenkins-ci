@@ -16,9 +16,9 @@ package org.devops
 class ci_config {
     def imageRepository = "https://harbor.templete.com/"
 
-    def gitlabApiHost = "http://gitlab-headless/api/v4"
+    def gitlabApiHost = "http://gitlab-headless.defult/api/v4"
     def gitlabIngressHost = "gitlab.example.com"
-    def gitlabHeadlessHost = "gitlab-headless"
+    def gitlabHeadlessHost = "gitlab-headless.defult"
     def gitlabAccountCredentialsId = "root"
 
     def pipelineWith =[ "main" , "qa" , "dev" ]
