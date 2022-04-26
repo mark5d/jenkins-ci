@@ -54,29 +54,28 @@ pipeline{
     agent { 
         kubernetes {
             yaml '''
-            ---
-            apiVersion: "v1"
-            kind: "Pod"
-            metadata:
-                name: "jenkins-slave"
-                namespace: "kube-ops"
-            spec:
-                containers:
-                image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
-                imagePullPolicy: "IfNotPresent"
-                name: "jnlp"
-                resources:
-                    limits: {}
-                    requests: {}
-                volumeMounts:
-                - mountPath: "/home/jenkins/agent"
-                  name: "workspace-volume"
-                  readOnly: false
-                restartPolicy: "Never"
-                volumes:
-                - emptyDir:
-                  medium: ""
-                  name: "workspace-volume"
+                apiVersion: "v1"
+                kind: "Pod"
+                metadata:
+                    name: "jenkins-slave"
+                    namespace: "kube-ops"
+                spec:
+                    containers:
+                    image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
+                    imagePullPolicy: "IfNotPresent"
+                    name: "jnlp"
+                    resources:
+                        limits: {}
+                        requests: {}
+                    volumeMounts:
+                    - mountPath: "/home/jenkins/agent"
+                    name: "workspace-volume"
+                    readOnly: false
+                    restartPolicy: "Never"
+                    volumes:
+                    - emptyDir:
+                    medium: ""
+                    name: "workspace-volume"
             '''
         }
         // node { label "jenkins-slave"   //指定运行此流水线的节点
