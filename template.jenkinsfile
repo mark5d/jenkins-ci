@@ -60,8 +60,8 @@ pipeline{
                     name: "jenkins-slave"
                 spec:
                     containers:
-                        image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
-                        name: "jnlp"
+                    image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
+                    name: "jnlp"
             '''
         }
         // node { label "jenkins-slave"   //指定运行此流水线的节点
