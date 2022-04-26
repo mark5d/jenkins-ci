@@ -37,13 +37,13 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
                     url: gitHttpUrl]]])
         } 
 
-        post{
+        // post{
             always{
                 script{
                     utils.PrintMes("流水线不管是否成功都会调用")
                 }
             }
-        }
+        // }
     }
 
 
