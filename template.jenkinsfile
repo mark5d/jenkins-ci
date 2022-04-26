@@ -5,7 +5,7 @@
 import groovy.util.ConfigSlurper
 // import groovy.json.JsonSlurper
 // String Workspace = "/opt"
-// def sonar = new org.devops.sonarqube()
+def sonar = new org.devops.sonarqube()
 def utils = new org.devops.utils()
 def ci_config = new org.devops.ci_config()
 
@@ -89,14 +89,14 @@ pipeline{
                     script{
                         // currentBuild.description = "获取代码"
                         utils.PrintMes("获取代码","green")
-                        // def branch = ref - "refs/heads/"
-                        // def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
-                        // checkout([$class: 'GitSCM', 
-                        //     branches: [[name: "*/${branch}"]], 
-                        //     extensions: [],
-                        //     userRemoteConfigs: 
-                        //         [[credentialsId: ci_config.gitlabAccountCredentialsId, 
-                        //         url: gitHttpUrl]]])
+                        def branch = ref - "refs/heads/"
+                        def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
+                        checkout([$class: 'GitSCM', 
+                            branches: [[name: "*/${branch}"]], 
+                            extensions: [],
+                            userRemoteConfigs: 
+                                [[credentialsId: ci_config.gitlabAccountCredentialsId, 
+                                url: gitHttpUrl]]])
                     }
                 }
             }
