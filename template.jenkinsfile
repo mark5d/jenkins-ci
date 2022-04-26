@@ -36,15 +36,17 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
                     [[credentialsId: ci_config.gitlabAccountCredentialsId, 
                     url: gitHttpUrl]]])
         } 
-    }
 
-    post{
-        always{
-            script{
-                utils.PrintMes("流水线不管是否成功都会调用")
+        post{
+            always{
+                script{
+                    utils.PrintMes("流水线不管是否成功都会调用")
+                }
             }
         }
     }
+
+
 }
 
 // pipeline{
