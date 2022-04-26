@@ -106,7 +106,7 @@ pipeline{
             steps{
                 timeout(time: 20, unit:"MINUTES"){
                     script{
-                        tools.PrintMes("构建打包","green")
+                        utils.PrintMes("构建打包","green")
                         // sh  """ 
                         //     ${mvnHome}/bin/mvn clean package -DskipTests"""
 
