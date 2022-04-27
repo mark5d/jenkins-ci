@@ -57,7 +57,7 @@ pipeline{
         //阶段1 获取代码
         stage("CheckOut"){
             when {
-                environment name: 'ISINIT', value: "1"
+                environment name: 'STAGES_ON_OFF', value: "1"
             }
             steps{
                 timeout(time: 5, unit:"MINUTES"){
@@ -80,7 +80,7 @@ pipeline{
         //阶段2 构建
         stage("Build"){
             when {
-                environment name: 'ISINIT', value: "1"
+                environment name: 'STAGES_ON_OFF', value: "1"
             }
             steps{
                 timeout(time: 20, unit:"MINUTES"){
@@ -94,7 +94,7 @@ pipeline{
         //阶段3 代码扫描
         stage("CodeScan"){
             when {
-                environment name: 'ISINIT', value: "1"
+                environment name: 'STAGES_ON_OFF', value: "1"
             }
             steps{
                 timeout(time: 30, unit:"MINUTES"){
@@ -108,7 +108,7 @@ pipeline{
         //阶段4 单元测试
         stage("UnitTest"){
             when {
-                environment name: 'ISINIT', value: "1"
+                environment name: 'STAGES_ON_OFF', value: "1"
             }
             steps{
                 timeout(time: 30, unit:"MINUTES"){
