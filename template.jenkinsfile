@@ -75,7 +75,7 @@ pipeline{
         GenericTrigger(
             genericVariables: [
             [key: 'ref', value: '$.ref'],
-            [key: 'git_http_url', value: '$.git_http_url']
+            [key: 'git_http_url', value: '$.project.git_http_url']
             ],
             token: 'abc',
             printContributedVariables: true,
