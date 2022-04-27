@@ -17,8 +17,11 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
     containerTemplate( 
         name: 'jnlp', 
         image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2" 
-        ) 
-    ] 
+    ),
+    containerTemplate( 
+        name: 'docker', 
+        image: "harbor.templete.com/devops/docker:stable" 
+    )] 
 )
 
 { //引用jenkins-slave的pod模块来构建Jenkins-Slave的pod 
