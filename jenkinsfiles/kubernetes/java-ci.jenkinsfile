@@ -25,6 +25,15 @@ pipeline{
         timeout(time: 1,unit: 'HOURS') //设置流水线超时时间
     }
 
+    // parameters {
+    //     string(name:'DEPLOY_ENV',dafaultValue:'dev',description:'')
+    //     string(name:'DATA',dafaultValue:'20220426',description:'')
+    // }
+
+    environment {
+        ISINIT = false
+    }
+
     triggers {
         GenericTrigger(
             genericVariables: [
@@ -42,6 +51,9 @@ pipeline{
     stages{
         //阶段1 获取代码
         stage("CheckOut"){
+            when {
+                environment name: 'ISINIT', value: false
+            }
             steps{
                 timeout(time: 5, unit:"MINUTES"){
                     script{
@@ -53,6 +65,9 @@ pipeline{
         }
         //阶段2 构建
         stage("Build"){
+            when {
+                environment name: 'ISINIT', value: false
+            }
             steps{
                 timeout(time: 20, unit:"MINUTES"){
                     script{
@@ -64,6 +79,9 @@ pipeline{
         }
         //阶段3 代码扫描
         stage("CodeScan"){
+            when {
+                environment name: 'ISINIT', value: false
+            }
             steps{
                 timeout(time: 30, unit:"MINUTES"){
                     script{
