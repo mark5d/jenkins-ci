@@ -13,7 +13,7 @@ pipeline{
                   name: "jenkins-slave"
                 spec:
                   containers:
-                    image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
+                  - image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
                     name: "jnlp"
             '''
         }
