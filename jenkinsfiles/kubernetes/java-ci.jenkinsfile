@@ -36,7 +36,7 @@ pipeline{
     // }
 
     environment {
-        ISINIT = "1"
+        STAGES_ON_OFF = "0"
     }
 
     triggers {
@@ -54,15 +54,19 @@ pipeline{
     
     //流水线的阶段
     stages{
+        stage("Init"){
+            currentBuild.description = ""
+            utils.PrintMes("初始化","green")
+        }
         //阶段1 获取代码
         stage("CheckOut"){
             when {
-                environment name: 'ISINIT', value: "2"
+                environment name: 'ISINIT', value: "1"
             }
             steps{
                 timeout(time: 5, unit:"MINUTES"){
                     script{
-                        currentBuild.description = "CheckOut"
+                        currentBuild.description = "\nCheckOut"
                         utils.PrintMes("获取代码","green")
                     }
                 }
@@ -71,7 +75,7 @@ pipeline{
         //阶段2 构建
         stage("Build"){
             when {
-                environment name: 'ISINIT', value: "2"
+                environment name: 'ISINIT', value: "1"
             }
             steps{
                 timeout(time: 20, unit:"MINUTES"){
@@ -85,7 +89,7 @@ pipeline{
         //阶段3 代码扫描
         stage("CodeScan"){
             when {
-                environment name: 'ISINIT', value: "2"
+                environment name: 'ISINIT', value: "1"
             }
             steps{
                 timeout(time: 30, unit:"MINUTES"){
@@ -98,6 +102,9 @@ pipeline{
         }
         //阶段4 单元测试
         stage("UnitTest"){
+            when {
+                environment name: 'ISINIT', value: "1"
+            }
             steps{
                 timeout(time: 30, unit:"MINUTES"){
                     script{
