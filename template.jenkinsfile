@@ -51,28 +51,27 @@ def ci_config = new org.devops.ci_config()
 
 pipeline{
     
-    // agent { 
-    //     kubernetes {
-    //         yaml '''
-    //             apiVersion: "v1"
-    //             kind: "Pod"
-    //             metadata:
-    //                 name: "jenkins-slave"
-    //             spec:
-    //                 containers:
-    //                 image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
-    //                 name: "jnlp"
-    //         '''
-    //     }
-     agent {  
-        when {
-            expression { BUILD_EXPRESSION }
+    agent { 
+        kubernetes {
+            yaml '''
+                apiVersion: "v1"
+                kind: "Pod"
+                metadata:
+                    name: "jenkins-slave"
+                spec:
+                    containers:
+                    image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
+                    name: "jnlp"
+            '''
         }
-           node { label "built-in"   //指定运行此流水线的节点
-                    // customWorkspace "${Workspace}"  //指定运行工作目录（可选）
-                    }
-                    
     }
+    //  agent {  
+
+    //        node { label "built-in"   //指定运行此流水线的节点
+    //                 // customWorkspace "${Workspace}"  //指定运行工作目录（可选）
+    //                 }
+                    
+    // }
 
 
     triggers {

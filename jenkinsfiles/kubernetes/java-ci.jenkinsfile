@@ -4,9 +4,18 @@ def utils = new org.devops.utils()
 
 pipeline{
     agent { 
-        node { 
-            label "built-in"   //指定运行此流水线的节点
-        }              
+        kubernetes {
+            yaml '''
+                apiVersion: "v1"
+                kind: "Pod"
+                metadata:
+                    name: "jenkins-slave"
+                spec:
+                    containers:
+                    image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
+                    name: "jnlp"
+            '''
+        }
     }
 
     options{
@@ -22,7 +31,7 @@ pipeline{
                 [key: 'ref', value: '$.ref'],
                 [key: 'git_http_url', value: '$.project.git_http_url']
             ],
-            token: 'abc',
+            token: 'kubernetes-java-ci',
             printContributedVariables: true,
             printPostContent: true,
             silentResponse: true,
