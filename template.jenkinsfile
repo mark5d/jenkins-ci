@@ -13,219 +13,220 @@ def ci_config = new org.devops.ci_config()
 // def git_auth = "9d9a2707-eab7-4dc9-b106-e52f329cbc95"
 
 //  创建一个Pod的模板，label为jenkins-slave 
-podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [ 
-    containerTemplate( 
-        name: 'jnlp', 
-        image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2" 
-        ) 
-    ] 
-)
+// podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [ 
+//     containerTemplate( 
+//         name: 'jnlp', 
+//         image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2" 
+//         ) 
+//     ] 
+// )
 
-{ //引用jenkins-slave的pod模块来构建Jenkins-Slave的pod 
-    node("jenkins-slave"){ 
-        // 第一步 
-        stage('拉取代码'){ 
-            currentBuild.description = "获取代码"
-            // utils.PrintMes("获取代码","green")
-            // def branch = ref - "refs/heads/"
-            // def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
-            // checkout([$class: 'GitSCM', 
-            //     branches: [[name: "*/${branch}"]], 
-            //     extensions: [],
-            //     userRemoteConfigs: 
-            //         [[credentialsId: ci_config.gitlabAccountCredentialsId, 
-            //         url: gitHttpUrl]]])
-        } 
+// { //引用jenkins-slave的pod模块来构建Jenkins-Slave的pod 
+//     node("jenkins-slave"){ 
+//         // 第一步 
+//         stage('拉取代码'){ 
+//             currentBuild.description = "获取代码"
+//             // utils.PrintMes("获取代码","green")
+//             // def branch = ref - "refs/heads/"
+//             // def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
+//             // checkout([$class: 'GitSCM', 
+//             //     branches: [[name: "*/${branch}"]], 
+//             //     extensions: [],
+//             //     userRemoteConfigs: 
+//             //         [[credentialsId: ci_config.gitlabAccountCredentialsId, 
+//             //         url: gitHttpUrl]]])
+//         } 
 
-        // post{
-            always{
-                script{
-                    utils.PrintMes("流水线不管是否成功都会调用")
-                }
-            }
-        // }
-    }
-
-
-}
-
-// pipeline{
-    
-//     agent { 
-//         kubernetes {
-//             yaml '''
-//                 apiVersion: "v1"
-//                 kind: "Pod"
-//                 metadata:
-//                     name: "jenkins-slave"
-//                 spec:
-//                     containers:
-//                     image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
-//                     name: "jnlp"
-//             '''
-//         }
-//     }
-//     //  agent {  
-
-//     //        node { label "built-in"   //指定运行此流水线的节点
-//     //                 // customWorkspace "${Workspace}"  //指定运行工作目录（可选）
-//     //                 }
-                    
-//     // }
-
-
-//     triggers {
-//         GenericTrigger(
-//             genericVariables: [
-//             [key: 'ref', value: '$.ref'],
-//             [key: 'git_http_url', value: '$.project.git_http_url']
-//             ],
-//             token: 'abc',
-//             printContributedVariables: true,
-//             printPostContent: true,
-//             silentResponse: true,
-//         )
-//     }
-//     // tools {
-//     //     maven 'maven-3.8.5'
-//     // }
-    
-//     options{
-//         timestamps() //日志会有时间
-//         skipDefaultCheckout() //删除隐式checkout scm语句
-//         disableConcurrentBuilds() //禁止并行
-//         timeout(time: 1,unit: 'HOURS') //设置流水线超时时间
-//     }
-    
-//     //流水线的阶段
-//     stages{
-//         //阶段1 获取代码
-//         stage("CheckOut"){
-//             steps{
-//                 timeout(time: 5, unit:"MINUTES"){
-//                     script{
-//                         // currentBuild.description = "获取代码"
-//                         utils.PrintMes("获取代码","green")
-                        
-//                         def branch = ref - "refs/heads/"
-//                         def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
-//                         utils.PrintMes("${branch}","green")
-//                         utils.PrintMes("${gitHttpUrl}","green")
-//                         // checkout([$class: 'GitSCM', 
-//                         //     branches: [[name: "*/${branch}"]], 
-//                         //     extensions: [],
-//                         //     userRemoteConfigs: 
-//                         //         [[credentialsId: ci_config.gitlabAccountCredentialsId, 
-//                         //         url: gitHttpUrl]]])
-//                     }
+//         // post{
+//             always{
+//                 script{
+//                     utils.PrintMes("流水线不管是否成功都会调用")
 //                 }
 //             }
-//         }
-//         //阶段2 构建
-//         stage("Build"){
-//             steps{
-//                 timeout(time: 20, unit:"MINUTES"){
-//                     script{
-//                         utils.PrintMes("构建打包","green")
-//                         // sh  """ 
-//                         //     ${mvnHome}/bin/mvn clean package -DskipTests"""
-
-
-//                     }
-//                 }
-//             }
-//         }
-//         //阶段3 代码扫描
-//         stage("CodeScan"){
-//             steps{
-//                 timeout(time: 30, unit:"MINUTES"){
-//                     script{
-//                         utils.PrintMes("代码扫描","green")
-//                         // def scannerHome = tool 'sonar-scanner'
-//                         // sonar.SonarScan("test","back-end",'first',"src","main",scannerHome)
-
-//                     }
-//                 }
-//             }
-//         }
-//         //阶段4 单元测试
-//         stage("UnitTest"){
-//             steps{
-//                 timeout(time: 30, unit:"MINUTES"){
-//                     script{
-//                         utils.PrintMes("UnitTest","green")
-//                     }
-//                 }
-//             }
-//         }
+//         // }
 //     }
-//     post {
-//         always{
-//             script{
-//                 utils.PrintMes("流水线不管是否成功都会调用","green")
-//             }
-//         }
-        
-//         success{
-//             script{
-//                 // currentBuild.description = "流水线执行成功"
-//                 // def gitServer = "http://gitlab-headless/api/v4"
-//                 // def reqUrl = "projects/2/statuses/1a680d47077aa22f771058b41615bc668d4afb11?state=success"
-//                 // withCredentials([string(credentialsId: 'gitlab-token', variable: 'gitlabtoken')]) { 
-//                 // result = httpRequest customHeaders: [[maskValue: true, name: 'PRIVATE-TOKEN', value: "${gitlabtoken}"]], 
-//                 //     httpMode: "POST", 
-//                 //     contentType: "APPLICATION_JSON",
-//                 //     consoleLogResponseBody: true,
-//                 //     ignoreSslErrors: true, 
-//                 //     requestBody: "",
-//                 //     url: "${gitServer}/${reqUrl}"
-//                 // // //quiet: true
-//                 // // println("${gitlabtoken}")
-//                 // }
-//                 utils.PrintMes("流水线执行成功","green")
-//             }
-        
-//         }
-//         failure{
-//             script{
-//                 currentBuild.description = "流水线执行失败"
-//                 utils.PrintMes("流水线执行失败","green")
-//             }
-//         }
-        
-//         aborted{
-//             script{
-//                 currentBuild.description = "流水线执行取消"
-//                 utils.PrintMes("流水线执行取消","green")
-//             }  
-//         }
-//     }
+
+
 // }
 
+pipeline{
+    
+    agent { 
+        kubernetes {
+            yaml '''
+                apiVersion: "v1"
+                kind: "Pod"
+                metadata:
+                    name: "jenkins-slave"
+                spec:
+                    containers:
+                    image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
+                    name: "jnlp"
+            '''
+        }
+    }
+    //  agent {  
 
-// // //authorizationMatrix,
-// // //buildDiscarder, 
-// // //catchError, 
-// // //checkoutToSubdirectory, 
-// // //disableConcurrentBuilds, disableResume, 
-// // //durabilityHint, 
-// // //githubProjectProperty, 
-// // //overrideIndexTriggers, 
-// // //parallelsAlwaysFailFast, 
-// // //preserveStashes, 
-// // //quietPeriod, 
-// // //rateLimitBuilds, 
-// // //retry, 
-// // //script, 
-// // //skipDefaultCheckout, 
-// // //skipStagesAfterUnstable, 
-// // //timeout, 
-// // //timestamps, 
-// // //waitUntil, 
-// // //warnError, 
-// // //withChecks, 
-// // //withContext, 
-// // //withCredentials, 
-// // //withEnv, 
-// // //wrap, 
-// // //ws
+    //        node { label "built-in"   //指定运行此流水线的节点
+    //                 // customWorkspace "${Workspace}"  //指定运行工作目录（可选）
+    //                 }
+                    
+    // }
+
+
+    triggers {
+        GenericTrigger(
+            genericVariables: [
+            [key: 'ref', value: '$.ref'],
+            [key: 'git_http_url', value: '$.project.git_http_url']
+            ],
+            token: 'abc',
+            printContributedVariables: true,
+            printPostContent: true,
+            silentResponse: true,
+        )
+    }
+    // tools {
+    //     maven 'maven-3.8.5'
+    // }
+    
+    options{
+        timestamps() //日志会有时间
+        skipDefaultCheckout() //删除隐式checkout scm语句
+        disableConcurrentBuilds() //禁止并行
+        timeout(time: 1,unit: 'HOURS') //设置流水线超时时间
+    }
+    
+    //流水线的阶段
+    stages{
+        //阶段1 获取代码
+        stage("CheckOut"){
+            steps{
+                timeout(time: 5, unit:"MINUTES"){
+                    script{
+                        // currentBuild.description = "获取代码"
+                        utils.PrintMes("获取代码","green")
+                        
+                        def branch = ref - "refs/heads/"
+                        def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
+                        utils.PrintMes("${branch}","green")
+                        utils.PrintMes("${gitHttpUrl}","green")
+                        checkout([$class: 'GitSCM', 
+                            branches: [[name: "*/${branch}"]], 
+                            extensions: [],
+                            userRemoteConfigs: 
+                                [[credentialsId: ci_config.gitlabAccountCredentialsId, 
+                                url: gitHttpUrl]]])
+                    }
+                }
+            }
+        }
+        //阶段2 构建
+        stage("Build"){
+            steps{
+                timeout(time: 20, unit:"MINUTES"){
+                    script{
+                        utils.PrintMes("构建打包","green")
+                        mvnHome = tool 'maven-3.8.5'
+                        sh  """ 
+                            ${mvnHome}/bin/mvn clean package -DskipTests"""
+
+
+                    }
+                }
+            }
+        }
+        //阶段3 代码扫描
+        stage("CodeScan"){
+            steps{
+                timeout(time: 30, unit:"MINUTES"){
+                    script{
+                        utils.PrintMes("代码扫描","green")
+                        // def scannerHome = tool 'sonar-scanner'
+                        // sonar.SonarScan("test","back-end",'first',"src","main",scannerHome)
+
+                    }
+                }
+            }
+        }
+        //阶段4 单元测试
+        stage("UnitTest"){
+            steps{
+                timeout(time: 30, unit:"MINUTES"){
+                    script{
+                        utils.PrintMes("UnitTest","green")
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always{
+            script{
+                utils.PrintMes("流水线不管是否成功都会调用","green")
+            }
+        }
+        
+        success{
+            script{
+                // currentBuild.description = "流水线执行成功"
+                // def gitServer = "http://gitlab-headless/api/v4"
+                // def reqUrl = "projects/2/statuses/1a680d47077aa22f771058b41615bc668d4afb11?state=success"
+                // withCredentials([string(credentialsId: 'gitlab-token', variable: 'gitlabtoken')]) { 
+                // result = httpRequest customHeaders: [[maskValue: true, name: 'PRIVATE-TOKEN', value: "${gitlabtoken}"]], 
+                //     httpMode: "POST", 
+                //     contentType: "APPLICATION_JSON",
+                //     consoleLogResponseBody: true,
+                //     ignoreSslErrors: true, 
+                //     requestBody: "",
+                //     url: "${gitServer}/${reqUrl}"
+                // // //quiet: true
+                // // println("${gitlabtoken}")
+                // }
+                utils.PrintMes("流水线执行成功","green")
+            }
+        
+        }
+        failure{
+            script{
+                currentBuild.description = "流水线执行失败"
+                utils.PrintMes("流水线执行失败","green")
+            }
+        }
+        
+        aborted{
+            script{
+                currentBuild.description = "流水线执行取消"
+                utils.PrintMes("流水线执行取消","green")
+            }  
+        }
+    }
+}
+
+
+// //authorizationMatrix,
+// //buildDiscarder, 
+// //catchError, 
+// //checkoutToSubdirectory, 
+// //disableConcurrentBuilds, disableResume, 
+// //durabilityHint, 
+// //githubProjectProperty, 
+// //overrideIndexTriggers, 
+// //parallelsAlwaysFailFast, 
+// //preserveStashes, 
+// //quietPeriod, 
+// //rateLimitBuilds, 
+// //retry, 
+// //script, 
+// //skipDefaultCheckout, 
+// //skipStagesAfterUnstable, 
+// //timeout, 
+// //timestamps, 
+// //waitUntil, 
+// //warnError, 
+// //withChecks, 
+// //withContext, 
+// //withCredentials, 
+// //withEnv, 
+// //wrap, 
+// //ws
