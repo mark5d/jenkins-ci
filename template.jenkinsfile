@@ -20,7 +20,9 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
     ),
     containerTemplate( 
         name: 'jenkins-docker', 
-        image: "harbor.templete.com/devops/docker:stable" 
+        image: "harbor.templete.com/devops/docker:stable" ,
+        ttyEnabled: true, 
+        command: 'cat'
     )] 
 )
 
