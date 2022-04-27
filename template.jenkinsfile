@@ -51,22 +51,22 @@ def ci_config = new org.devops.ci_config()
 
 pipeline{
     
-    agent { 
-        kubernetes {
-            yaml '''
-                apiVersion: "v1"
-                kind: "Pod"
-                metadata:
-                    name: "jenkins-slave"
-                spec:
-                    containers:
-                    image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
-                    name: "jnlp"
-            '''
-        }
-        // node { label "jenkins-slave"   //指定运行此流水线的节点
-        //             // customWorkspace "${Workspace}"  //指定运行工作目录（可选）
-        //             }
+    // agent { 
+    //     kubernetes {
+    //         yaml '''
+    //             apiVersion: "v1"
+    //             kind: "Pod"
+    //             metadata:
+    //                 name: "jenkins-slave"
+    //             spec:
+    //                 containers:
+    //                 image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
+    //                 name: "jnlp"
+    //         '''
+    //     }
+        node { label "built-in"   //指定运行此流水线的节点
+                    // customWorkspace "${Workspace}"  //指定运行工作目录（可选）
+                    }
                     
     }
     // tools {
@@ -91,12 +91,14 @@ pipeline{
                         utils.PrintMes("获取代码","green")
                         def branch = ref - "refs/heads/"
                         def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
-                        checkout([$class: 'GitSCM', 
-                            branches: [[name: "*/${branch}"]], 
-                            extensions: [],
-                            userRemoteConfigs: 
-                                [[credentialsId: ci_config.gitlabAccountCredentialsId, 
-                                url: gitHttpUrl]]])
+                        utils.PrintMes("${branch}",green})
+                        utils.PrintMes("${gitHttpUrl}",green})
+                        // checkout([$class: 'GitSCM', 
+                        //     branches: [[name: "*/${branch}"]], 
+                        //     extensions: [],
+                        //     userRemoteConfigs: 
+                        //         [[credentialsId: ci_config.gitlabAccountCredentialsId, 
+                        //         url: gitHttpUrl]]])
                     }
                 }
             }
