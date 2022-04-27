@@ -91,8 +91,8 @@ pipeline{
                         utils.PrintMes("获取代码","green")
                         def branch = ref - "refs/heads/"
                         def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
-                        utils.PrintMes("${branch}",green})
-                        utils.PrintMes("${gitHttpUrl}",green})
+                        utils.PrintMes("${branch}",green)
+                        utils.PrintMes("${gitHttpUrl}",green)
                         // checkout([$class: 'GitSCM', 
                         //     branches: [[name: "*/${branch}"]], 
                         //     extensions: [],
