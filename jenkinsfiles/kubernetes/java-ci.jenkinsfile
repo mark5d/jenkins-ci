@@ -32,7 +32,7 @@ pipeline{
 
     parameters {
         string(name:'DEPLOY_ENV',defaultValue:'dev',description:'')
-        string(name:'DATA',dafaultValue:'20220426',description:'')
+        string(name:'DATA',defaultValue:'20220426',description:'')
     }
 
     environment {
