@@ -19,7 +19,7 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
         image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2" 
     ),
     containerTemplate( 
-        name: 'docker', 
+        name: 'jenkins-docker', 
         image: "harbor.templete.com/devops/docker:stable" 
     )] 
 )
@@ -41,7 +41,7 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
         } 
         stage('构建jar包'){
             sh """mvn clean package -DskipTests"""
-            container('docker') {
+            container('jenkins-docker') {
                 sh """
                    docker build -t harbor.templete.com/library/backend:0.0.1
                 """
