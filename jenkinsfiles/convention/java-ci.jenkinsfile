@@ -15,6 +15,19 @@ pipeline{
         disableConcurrentBuilds() //禁止并行
         timeout(time: 1,unit: 'HOURS') //设置流水线超时时间
     }
+
+    triggers {
+        GenericTrigger(
+            genericVariables: [
+                [key: 'ref', value: '$.ref'],
+                [key: 'git_http_url', value: '$.project.git_http_url']
+            ],
+            token: 'abc',
+            printContributedVariables: true,
+            printPostContent: true,
+            silentResponse: true,
+        )
+    }
     
     //流水线的阶段
     stages{
