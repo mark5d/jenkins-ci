@@ -57,7 +57,7 @@ pipeline{
         stage("Init"){
             steps{
                 script{
-                    currentBuild.description = ""
+                    currentBuild.description = "流水线执行开始"
                     utils.PrintMes("初始化","green")
                 }
             }
@@ -123,6 +123,7 @@ pipeline{
     post {
         always{
             script{
+                currentBuild.description += "\n流水线执行结束"
                 utils.PrintMes("流水线不管是否成功都会调用","green")
             }
         }
