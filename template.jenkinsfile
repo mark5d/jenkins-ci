@@ -26,7 +26,7 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
     )],
     volumes: [ 
         hostPathVolume(mountPath: '/usr/local/apache-maven/repo', hostPath: '/root/maven/repo'),
-        hostPathVolume(mountPath: '/usr/local/apache-maven/lib', hostPath: '/root/maven/lib'),
+        // hostPathVolume(mountPath: '/usr/local/apache-maven/lib', hostPath: '/root/maven/lib'),
     ] 
 )
 
