@@ -1,6 +1,7 @@
 @Library('jenkinslibrary@master') _
 
 def utils = new org.devops.utils()
+def ci_config = new org.devops.ci_config()
 
 pipeline{
     agent { 
