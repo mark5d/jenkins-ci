@@ -28,7 +28,7 @@ pipeline{
 
 
     environment {
-        STAGES_ON_OFF = "0"
+        STAGES_ON_OFF = "1"
     }
 
     triggers {
