@@ -4,19 +4,24 @@ def utils = new org.devops.utils()
 
 pipeline{
     agent { 
-        kubernetes {
-            yaml '''
-                apiVersion: "v1"
-                kind: "Pod"
-                metadata:
-                    name: "jenkins-slave"
-                spec:
-                    containers:
-                    image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
-                    name: "jnlp"
-            '''
-        }
+        node { 
+            label "built-in"   //指定运行此流水线的节点
+        }              
     }
+    // agent { 
+    //     kubernetes {
+    //         yaml '''
+    //             apiVersion: "v1"
+    //             kind: "Pod"
+    //             metadata:
+    //                 name: "jenkins-slave"
+    //             spec:
+    //                 containers:
+    //                 image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
+    //                 name: "jnlp"
+    //         '''
+    //     }
+    // }
 
     options{
         timestamps() //日志会有时间
