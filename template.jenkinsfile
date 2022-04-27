@@ -49,7 +49,7 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
             sh """mvn clean package -DskipTests"""
             container('jenkins-docker') {
                 sh """
-                   docker build -t harbor.templete.com/library/backend:0.0.1
+                   docker build -t harbor.templete.com/library/backend:0.0.1 .
                 """
             }
         }
