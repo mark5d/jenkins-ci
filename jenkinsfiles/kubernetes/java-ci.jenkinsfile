@@ -140,6 +140,9 @@ pipeline{
                     script{
                         currentBuild.description += "\nBuild-image"
                         utils.PrintMes("构建打docker镜像","green")
+                        sh """
+                            docker build -t harbor.templete.com/library/backend:0.0.1 .
+                        """
 
                     }
                 }
