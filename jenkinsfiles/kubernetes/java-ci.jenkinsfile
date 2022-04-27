@@ -95,8 +95,9 @@ pipeline{
                 timeout(time: 20, unit:"MINUTES"){
                     script{
                         currentBuild.description += "\nBuild-jar"
-                        utils.PrintMes("构建打jar包","green")
-                        sh """mvn clean package -DskipTests"""
+                        mvnHome = tool 'maven-3.8.5'
+                        sh  """ 
+                            ${mvnHome}/bin/mvn clean package -DskipTests"""
                     }
                 }
             }
