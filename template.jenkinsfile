@@ -75,21 +75,12 @@ pipeline{
         GenericTrigger(
             genericVariables: [
             [key: 'ref', value: '$.ref'],
-            [key: 'git_http_url', value: '$.git_http_url'],
+            [key: 'git_http_url', value: '$.git_http_url']
             ],
-
-            // causeString: 'Triggered on $ref',
-
             token: 'abc',
-            // tokenCredentialId: '',
-
             printContributedVariables: true,
             printPostContent: true,
-
             silentResponse: true,
-
-            // regexpFilterText: '$ref',
-            // regexpFilterExpression: 'refs/heads/' + BRANCH_NAME
         )
     }
     // tools {
@@ -112,6 +103,7 @@ pipeline{
                     script{
                         // currentBuild.description = "获取代码"
                         utils.PrintMes("获取代码","green")
+                        
                         def branch = ref - "refs/heads/"
                         def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
                         utils.PrintMes("${branch}","green")
