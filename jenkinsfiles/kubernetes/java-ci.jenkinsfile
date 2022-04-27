@@ -10,9 +10,9 @@ pipeline{
                 apiVersion: "v1"
                 kind: "Pod"
                 metadata:
-                    name: "jenkins-slave"
+                  name: "jenkins-slave"
                 spec:
-                    containers:
+                  containers:
                     image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
                     name: "jnlp"
             '''
