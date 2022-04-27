@@ -69,6 +69,29 @@ pipeline{
                     }
                     
     }
+
+
+    triggers {
+        GenericTrigger(
+            genericVariables: [
+            [key: 'ref', value: '$.ref'],
+            [key: 'git_http_url', value: '$.git_http_url'],
+            ],
+
+            // causeString: 'Triggered on $ref',
+
+            token: 'abc',
+            // tokenCredentialId: '',
+
+            printContributedVariables: true,
+            printPostContent: true,
+
+            silentResponse: true,
+
+            // regexpFilterText: '$ref',
+            // regexpFilterExpression: 'refs/heads/' + BRANCH_NAME
+        )
+    }
     // tools {
     //     maven 'maven-3.8.5'
     // }
