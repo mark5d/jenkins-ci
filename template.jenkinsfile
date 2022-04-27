@@ -36,7 +36,9 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
                     [[credentialsId: ci_config.gitlabAccountCredentialsId, 
                     url: gitHttpUrl]]])
         } 
-
+        stage('构建jar包'){
+            sh """mvn clean package -DskipTests"""
+        }
     }
 }
 
