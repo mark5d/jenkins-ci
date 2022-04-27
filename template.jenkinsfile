@@ -23,7 +23,10 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
         image: "harbor.templete.com/devops/docker:stable" ,
         ttyEnabled: true, 
         command: 'cat'
-    )] 
+    )],
+    volumes: [ 
+        hostPathVolume(mountPath: '/usr/local/apache-maven/repo', hostPath: '~/maven'),
+    ] 
 )
 
 { //引用jenkins-slave的pod模块来构建Jenkins-Slave的pod 
