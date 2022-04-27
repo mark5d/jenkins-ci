@@ -15,6 +15,8 @@ pipeline{
                   containers:
                   - image: "harbor.templete.com/devops/jenkins-slave-maven:jdk8-maven3.6.2"
                     name: "jnlp"
+                  - image: "harbor.templete.com/devops/docker:stable"
+                    name: "docker"
             '''
         }
     }
@@ -79,15 +81,15 @@ pipeline{
             }
         }
         //阶段2 构建
-        stage("Build"){
+        stage("Build-jar"){
             when {
                 environment name: 'STAGES_ON_OFF', value: "1"
             }
             steps{
                 timeout(time: 20, unit:"MINUTES"){
                     script{
-                        currentBuild.description += "\nBuild"
-                        utils.PrintMes("构建打包","green")
+                        currentBuild.description += "\nBuild-jar"
+                        utils.PrintMes("构建打jar包","green")
                         sh """mvn clean package -DskipTests"""
                     }
                 }
@@ -117,6 +119,21 @@ pipeline{
                     script{
                         currentBuild.description += "\nUnitTest"
                         utils.PrintMes("UnitTest","green")
+                    }
+                }
+            }
+        }
+        //阶段5 构建docker images
+        stage("Build-image"){
+            when {
+                environment name: 'STAGES_ON_OFF', value: "1"
+            }
+            steps{
+                timeout(time: 20, unit:"MINUTES"){
+                    script{
+                        currentBuild.description += "\nBuild-image"
+                        utils.PrintMes("构建打docker镜像","green")
+
                     }
                 }
             }
