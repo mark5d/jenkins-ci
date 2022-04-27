@@ -55,8 +55,12 @@ pipeline{
     //流水线的阶段
     stages{
         stage("Init"){
-            currentBuild.description = ""
-            utils.PrintMes("初始化","green")
+            steps{
+                script{
+                    currentBuild.description = ""
+                    utils.PrintMes("初始化","green")
+                }
+            }
         }
         //阶段1 获取代码
         stage("CheckOut"){
