@@ -3,11 +3,6 @@
 def utils = new org.devops.utils()
 
 pipeline{
-    // agent { 
-    //     node { 
-    //         label "built-in"   //指定运行此流水线的节点
-    //     }              
-    // }
     agent { 
         kubernetes {
             yaml '''
@@ -30,10 +25,7 @@ pipeline{
         timeout(time: 1,unit: 'HOURS') //设置流水线超时时间
     }
 
-    // parameters {
-    //     string(name:'DEPLOY_ENV',defaultValue:'dev',description:'')
-    //     string(name:'DATA',defaultValue:'20220426',description:'')
-    // }
+
 
     environment {
         STAGES_ON_OFF = "0"
@@ -72,7 +64,16 @@ pipeline{
                     script{
                         currentBuild.description = "\nCheckOut"
                         utils.PrintMes("获取代码","green")
+                        def branch = ref - "refs/heads/"
+                        def gitHttpUrl = git_http_url.replace(ci_config.gitlabIngressHost,ci_config.gitlabHeadlessHost)
+                        checkout([$class: 'GitSCM', 
+                            branches: [[name: "*/${branch}"]], 
+                            extensions: [],
+                            userRemoteConfigs: 
+                                [[credentialsId: ci_config.gitlabAccountCredentialsId, 
+                                url: gitHttpUrl]]])
                     }
+
                 }
             }
         }

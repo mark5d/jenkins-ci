@@ -10,6 +10,11 @@ pipeline{
         }              
     }
 
+    parameters {
+        string(name:'DEPLOY_ENV',defaultValue:'dev',description:'')
+        string(name:'DATA',defaultValue:'20220426',description:'')
+    }
+
     options{
         timestamps() //日志会有时间
         skipDefaultCheckout() //删除隐式checkout scm语句
